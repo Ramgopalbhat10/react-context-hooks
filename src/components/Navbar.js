@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { compose } from 'recompose';
 import withTheme from '../hoc/withTheme';
+import withAuth from '../hoc/withAuth';
 
 class Navbar extends Component {
   render() {
@@ -7,6 +9,9 @@ class Navbar extends Component {
     return (
       <nav style={{ background: ui, color: syntax }}>
         <h2>Welcome to Course Tracker</h2>
+        <div>
+          {this.props.authStatus ? "Logged in" : "Logged out"}
+        </div>
         <ul>
           <li>Home</li>
           <li>About</li>
@@ -17,4 +22,7 @@ class Navbar extends Component {
   }
 }
 
-export default withTheme(Navbar);
+export default compose(
+  withTheme,
+  withAuth
+)(Navbar);
